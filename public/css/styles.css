@@ -1,6 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+body {
+  background-image: none;
+  font-family: Inter;
+}
+
+#wrapper {
+  background: white;
+  border: none;
+  margin: 0;
+  padding: 50px 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.siteName a, #tools a {
+  color: black;
+  text-decoration: none;
+}
+
+.siteName a {
+  font-size: 3.5rem;
+}
+
+#tools {
+  text-align: right;
+}
+
+#tools a {
+  font-size: 2rem;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: rgb(48, 48, 48);
+  color: white;
+  list-style-type: none;
+}
+
+nav ul li {
+  margin: 10px auto;
+  font-size: 1.5rem;
+}
+
+#home-hero h1 {
+  font-size: 2rem;
+}
+
+#home-hero img {
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+
+#hero-ad {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  color: rgb(105, 211, 221);
+  border-radius: 5px;
+  width: 25%;
+  font-size: 100%;
+  top: 300px;
+  left: 100px;
+}
+
+#hero-ad a img {
+  width: 75%;
+}
+
+#about-vehicle {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: 50px;
+}
+
+#about-vehicle h3 {
+  font-size: 2rem;
+}
+
+#upgrades {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#upgrades, #reviews {
+  grid-column: 1/2;
+}
+
+.upgrade {
+  margin: 20px auto;
+  text-align: center;
+  width: 100%;
+}
+
+.upgrade img{
+  display: block;
+  background: rgb(105, 211, 221);
+  padding: 0 2rem;
+  border: 1px solid black;
+  width: 90%;
+  margin: auto;
+  object-fit: contain;
+}
+
+.upgrade a {
+  font-size: 1.2rem;
+}
+
+#review-title {
+  grid-row: 1/2;
+}
+
+#reviews {
+  grid-row: 2/3;
+  justify-content: center;
+  align-content: center;
+  font-size: 1.5rem;
+}
+
+#reviews ul li {
+  margin: 40px;
+}
+
+footer {
+  font-size: 1.5rem;
+  margin-bottom: -50px;
+}
+
+@media screen and (min-width: 801px) {
+  body {
+    background-image: url("../images/site/checkerboard.jpg");
+  }
+
+  #wrapper {
+    background: white;
+    border: 8px solid rgb(105, 211, 221);
+    border-radius: 8px;
+    margin: 2rem 5rem 0 5rem;
+    padding: 50px 20px;
+  }
+
+  nav ul li, #reviews{
+    font-size: 2rem;
+  }
+
+  #home-hero h1 {
+    font-size: 3.5rem;
+  }
+
+  #hero-ad {
+    width: 30%;
+    top: 450px;
+    left: 150px;
+    font-size: 120%;
+  }
+
+  #about-vehicle h3 {
+    font-size: 3rem;
+  }
+
+  #about-vehicle {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #upgrades {
+    grid-column: 1/2;
+  }
+
+  #review-title {
+    grid-row: 1/2;
+  }
+  
+  #reviews {
+    grid-column: 2/3;
+    grid-row: 2/3;
+  }
+}
+
+@media screen and (min-width: 1750px) {
+  #hero-ad {
+    width: 20%;
+    left: 350px;
+    font-size: 150%;
+  }
 }
