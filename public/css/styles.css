@@ -54,6 +54,20 @@ nav ul {
 nav ul li {
   margin: 10px auto;
   font-size: 1.5rem;
+  padding: 5px;
+}
+
+nav ul li:hover {
+  background: white;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  color: black;
 }
 
 #home-hero h1 {
@@ -188,6 +202,36 @@ footer {
     grid-column: 2/3;
     grid-row: 2/3;
   }
+}
+
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+#inv-display li {
+  border: 3px solid rgba(170, 170, 170, 0.802);
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 10px auto;
+  text-align: center;
+  list-style-type: none;
+  width: 350px;
+}
+
+#inv-display li a img {
+  width: 300px;
+  height: auto;
+}
+
+.namePrice {
+  height: 150px;
+  line-height: 50px;
+}
+
+.namePrice span {
+  font-size: 1.8rem;
 }
 
 @media screen and (min-width: 1750px) {
