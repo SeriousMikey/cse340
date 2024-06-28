@@ -234,6 +234,67 @@ footer {
   font-size: 1.8rem;
 }
 
+#vehicle-title {
+  font-size: 2rem;
+}
+
+#vehicle-info {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#vehicle-info img {
+  padding-top: 2rem;
+  margin: auto;
+  max-width: 75%;
+}
+
+#vehicle-details h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+#vehicle-details ul li {
+  list-style-type: none;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+#vehicle-details ul li:nth-child(odd) {
+  background: rgb(236, 236, 236);
+}
+
+@media screen and (min-width: 1000px) {
+  #vehicle-title {
+    font-size: 2.5rem;
+  }
+  
+  #vehicle-info {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  #vehicle-info img {
+    grid-column: 1/2;
+    padding: 2.5rem;
+    max-width: none;
+  }
+  
+  #vehicle-details {
+    grid-column: 2/3;
+  }
+  
+  #vehicle-details h2 {
+    font-size: 2rem;
+    text-align: left;
+  }
+  
+  #vehicle-details ul li {
+    margin: 1.5rem -1rem;
+    font-size: 1.5rem;
+  }
+}
+
 @media screen and (min-width: 1750px) {
   #hero-ad {
     width: 20%;

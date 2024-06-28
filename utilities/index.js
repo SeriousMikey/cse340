@@ -53,6 +53,27 @@ Util.buildClassificationGrid = async function(data){
     return grid
 }
 
+Util.buildIndividualView = async function(data) {
+    let content
+    if(data.length > 0){
+        content = `<section id="vehicle-info">
+        <img src="${data[0].inv_image}" alt="Image of ${data[0].inv_year} ${data[0].inv_model} ${data[0].inv_make}">
+        <div id="vehicle-details">
+            <h2>${data[0].inv_model} ${data[0].inv_make} Details</h2>
+            <ul>
+                <li><b>Price: $${new Intl.NumberFormat('en-US').format(data[0].inv_price)}</b></li>
+                <li><b>Description</b>: ${data[0].inv_description}</li>
+                <li><b>Color</b>: ${data[0].inv_color}</li>
+                <li><b>Miles</b>: ${new Intl.NumberFormat('en-US').format(data[0].inv_miles)}</li>
+            </ul>
+        </div>
+    </section>`
+    } else { 
+        content = '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    }
+    return content
+}
+
 //Error handling
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
