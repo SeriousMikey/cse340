@@ -24,7 +24,7 @@ invCont.buildByInvId = async function (req, res, next) {
   const content = await utilities.buildIndividualView(data)
   let nav = await utilities.getNav()
   const vehicle = `${data[0].inv_year} ${data[0].inv_model} ${data[0].inv_make}`
-  res.render("./inventory/individual", {
+  res.render("./inventory/detail", {
     title: vehicle,
     nav,
     content,

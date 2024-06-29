@@ -6,4 +6,8 @@ baseController.buildHome = async function(req, res){
     res.render("index", {title: "Home", nav})
 }
 
+baseController.produceError = async function(req, res) {
+    res.render("idex", {title: "Err"})
+}
+
 module.exports = baseController
