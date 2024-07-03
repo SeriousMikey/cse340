@@ -265,6 +265,110 @@ footer {
   background: rgb(236, 236, 236);
 }
 
+.notice {
+  color: white;
+  background: rgb(105, 211, 221);
+  text-align: center;
+  margin: 20px;
+  padding: 7px;
+  list-style-type: none;
+  width: 20%;
+  position: absolute;
+  right: 8.5rem;
+  border: 3px solid blue;
+  font-size: 1.2rem;
+}
+
+#login-form, #registration-form {
+  padding: 50px;
+  border-radius: 10px;
+  margin: auto;
+  max-width: 700px;
+}
+
+#login-form {
+  background: rgb(17, 50, 80);
+  border: 5px solid gray;
+}
+
+#login-form label, #registration-form label {
+  font-size: 1.5rem;
+  margin-left: 2.5rem;
+}
+
+#login-form label {
+  color: white;
+}
+
+.login-input, .registration-input {
+  display: block;
+  margin: 10px auto;
+  width: 80%;
+  border-radius: 5px;
+  font-size: 1.7rem;
+}
+
+.button-holder {
+  text-align: center;
+  margin: 30px;
+}
+
+.login-button, .registration-button {
+  font-size: 1.5rem;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.login-button {
+  border: 1px solid rgb(105, 211, 221);
+}
+
+#login-form h2 {
+  text-align: center;
+  color: white;
+  margin: 30px auto;
+}
+
+#login-form h2 a {
+  color: white;
+}
+
+#registration-form {
+  border: 5px solid black;
+}
+
+#registration-form label {
+  color: black;
+}
+
+.registration-button {
+  color: white;
+  border: none;
+  background: rgb(26, 79, 176);
+}
+
+#login-form span, #registration-form span {
+  display: block;
+  text-align: center;
+  margin: 20px;
+}
+
+#login-form span {
+  color: white;
+}
+
+#registration-form span {
+  color: black;
+}
+
+input:required:invalid, input:focus:invalid {
+  border: 2px solid red;
+}
+
+input:required:valid {
+  border: 2px solid green;
+}
+
 @media screen and (min-width: 1000px) {
   #vehicle-title {
     font-size: 2.5rem;
