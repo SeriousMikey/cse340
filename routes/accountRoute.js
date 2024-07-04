@@ -19,6 +19,7 @@ router.post(
 
 router.post(
     "/login",
+    utilities.handleErrors(regValidate.loginRules()),
     (req, res) => {
         res.status(200).send("login process")
     }

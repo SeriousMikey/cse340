@@ -33,7 +33,7 @@ validate.registrationRules = () => {
         .custom(async (account_email) => {
             const emailExists = await accountModel.checkExistingEmail(account_email)
             if (emailExists) {
-                throw new Error("Email exists. Please log in or use different email")
+                throw new Error("Email exists. Please log in or use different email.")
             }
         }),
 
@@ -72,6 +72,45 @@ validate.checkRegData = async (req, res, next) => {
         return
     }
     next()
+}
+
+/*  **********************************
+  *  Login Data Validation Rules
+  * ********************************* */
+validate.loginRules = () => {
+    return [
+        // valid email is required and cannot already exist in the DB
+        body("account_email")
+        .trim()
+        .isEmail()
+        .normalizeEmail() // refer to validator.js docs
+        .withMessage("A valid email is required.")
+        .custom(async (account_email) => {
+            const emailExists = await accountModel.checkExistingEmail(account_email)
+            if (!emailExists) {
+                throw new Error("Email does not exist. Please log in using a different email.")
+            }
+        }),
+
+        // password is required and must be strong password
+        body("account_password")
+        .trim()
+        .notEmpty()
+        .isStrongPassword({
+            minLength: 12,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 1,
+        })
+        .withMessage("Password does not meet requirements.")
+        .custom(async (account_email, account_password) => {
+            const passwordMatches = await accountModel.checkPasswordMatchesEmail(account_email, account_password)
+            if (!passwordMatches) {
+                throw new Error("Password does not match email.")
+            }
+        }),
+    ]
 }
 
 module.exports = validate
