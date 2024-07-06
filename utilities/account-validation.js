@@ -79,38 +79,54 @@ validate.checkRegData = async (req, res, next) => {
   * ********************************* */
 validate.loginRules = () => {
     return [
-        // valid email is required and cannot already exist in the DB
-        body("account_email")
+      // valid email is required and cannot already exist in the database
+      body("account_email")
         .trim()
         .isEmail()
         .normalizeEmail() // refer to validator.js docs
         .withMessage("A valid email is required.")
         .custom(async (account_email) => {
-            const emailExists = await accountModel.checkExistingEmail(account_email)
-            if (!emailExists) {
-                throw new Error("Email does not exist. Please log in using a different email.")
-            }
+          const emailExists = await accountModel.checkExistingEmail(account_email)
+          if (!emailExists){
+            throw new Error("No account found, please use a different email or register an account.")
+          }
         }),
-
-        // password is required and must be strong password
-        body("account_password")
+  
+  
+  
+      // password is required and must be strong password
+      body("account_password")
         .trim()
         .notEmpty()
         .isStrongPassword({
-            minLength: 12,
-            minLowercase: 1,
-            minUppercase: 1,
-            minNumbers: 1,
-            minSymbols: 1,
+          minLength: 12,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 1,
         })
-        .withMessage("Password does not meet requirements.")
-        .custom(async (account_email, account_password) => {
-            const passwordMatches = await accountModel.checkPasswordMatchesEmail(account_email, account_password)
-            if (!passwordMatches) {
-                throw new Error("Password does not match email.")
-            }
-        }),
+        .withMessage("Invalid password."),
     ]
-}
+  }
+  
+  
+  
+  /* ******************************
+  * Check data and return errors or continue to login
+  * ***************************** */
+  validate.checkLoginData = async (req, res, next) => {
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+      res.render("account/login", {
+        errors,
+        title: "Login",
+        nav,
+      })
+      return
+    }
+    next()
+  }
 
 module.exports = validate
