@@ -15,7 +15,8 @@ router.post(
     "/registration", 
     formValidate.registrationRules(),
     formValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount))
+    utilities.handleErrors(accountController.registerAccount)
+)
 
 router.post(
   "/login",
