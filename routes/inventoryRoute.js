@@ -36,4 +36,18 @@ router.post(
     utilities.handleErrors(invController.processNewVehicle)
 )
 
+// Inventory management
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// Edit inventory
+router.get("/edit/:invId", utilities.handleErrors(invController.editInventoryView))
+
+// On vehicle edited
+router.post(
+    "/update/",
+    formValidate.newVehicleRules(),
+    formValidate.checkNewVehicleData,
+    utilities.handleErrors(invController.updateVehicle)
+)
+
 module.exports = router;

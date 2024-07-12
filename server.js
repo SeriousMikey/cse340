@@ -19,6 +19,7 @@ const pool = require("./database/")
 const accountRoute = require("./routes/accountRoute")
 const accountController = require("./controllers/accountController")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 
 /* ***********************
@@ -35,6 +36,7 @@ app.use(session({
   name: 'sessionId',
 }))
 
+// Body Parser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
@@ -45,6 +47,12 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+// Cookie Parser
+app.use(cookieParser())
+
+// Check JWT Token
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Tempaltes

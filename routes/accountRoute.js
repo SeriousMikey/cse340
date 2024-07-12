@@ -5,12 +5,17 @@ const utilities = require("../utilities/index")
 const accountController = require("../controllers/accountController")
 const formValidate = require("../utilities/account-validation")
 
+// Management route
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
+
 // Route to login
-router.get("/login", accountController.buildLogin)
+router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
 // Route to registration
-router.get("/registration", accountController.buildRegistration)
+router.get("/registration", utilities.handleErrors(accountController.buildRegistration))
 
+
+// Registration Process
 router.post(
     "/registration", 
     formValidate.registrationRules(),
@@ -18,13 +23,12 @@ router.post(
     utilities.handleErrors(accountController.registerAccount)
 )
 
+// Login Process
 router.post(
   "/login",
    formValidate.loginRules(),
    formValidate.checkLoginData,
-   (req, res) => {
-     res.status(200).send('login process')
-   },
+   utilities.handleErrors(accountController.accountLogin)
 )
 
 module.exports = router
