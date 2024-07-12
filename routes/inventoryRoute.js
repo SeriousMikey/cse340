@@ -50,4 +50,13 @@ router.post(
     utilities.handleErrors(invController.updateVehicle)
 )
 
+// Delete inventory
+router.get("/delete/:invId", utilities.handleErrors(invController.deleteInventoryView))
+
+// On vehicle deleted
+router.post(
+    "/delete",
+    utilities.handleErrors(invController.deleteVehicle)
+)
+
 module.exports = router;

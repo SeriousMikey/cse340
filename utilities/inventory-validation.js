@@ -105,7 +105,8 @@ validate.newVehicleRules = () => {
 // Check the new vehicle data
 validate.checkNewVehicleData = async (req, res, next) => {
     const { classification_id, 
-        inv_make, inv_model, 
+        inv_make, 
+        inv_model, 
         inv_description, 
         inv_image, 
         inv_thumbnail, 
@@ -125,7 +126,8 @@ validate.checkNewVehicleData = async (req, res, next) => {
             nav,
             classificationList: classList,
             classification_id, 
-            inv_make, inv_model, 
+            inv_make, 
+            inv_model, 
             inv_description, 
             inv_image, 
             inv_thumbnail, 
@@ -142,7 +144,8 @@ validate.checkNewVehicleData = async (req, res, next) => {
 // Check the updated vehicle data
 validate.checkUpdateData = async (req, res, next) => {
     const { classification_id, 
-        inv_make, inv_model, 
+        inv_make, 
+        inv_model, 
         inv_description, 
         inv_image, 
         inv_thumbnail, 
@@ -163,7 +166,8 @@ validate.checkUpdateData = async (req, res, next) => {
             nav,
             classificationList: classList,
             classification_id, 
-            inv_make, inv_model, 
+            inv_make, 
+            inv_model, 
             inv_description, 
             inv_image, 
             inv_thumbnail, 
