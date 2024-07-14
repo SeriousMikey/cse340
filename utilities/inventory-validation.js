@@ -21,10 +21,12 @@ validate.checkClassificationName = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
+        let links = utilities.getAccountLinks()
         res.render("inventory/add-classification", {
             errors,
             title: "Add New Classification",
             nav,
+            links,
             classification_name
         })
         return
@@ -111,11 +113,13 @@ validate.checkNewVehicleData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
+        let links = utilities.getAccountLinks()
         let classList = await utilities.buildClassificationList()
         res.render("inventory/add-inventory", {
             errors,
             title: "Add New Vehicle",
             nav,
+            links,
             classificationList: classList,
             classification_id, 
             inv_make, 
@@ -151,11 +155,13 @@ validate.checkUpdateData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
+        let links = utilities.getAccountLinks()
         let classList = await utilities.buildClassificationList()
         res.render("inventory/edit-inventory", {
             errors,
             title: "Edit " + inv_make + " " + inv_model,
             nav,
+            links,
             classificationList: classList,
             classification_id, 
             inv_make, 
