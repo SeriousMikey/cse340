@@ -95,11 +95,11 @@ Util.buildIndividualView = async function(car_data, review_data, users_data, inv
         
       if (cookies.jwt) {
         content += `<h3>Add Your Own Review</h3>
-        <form id="review-form" action="/inv/detail/:invId" method="post">
+        <form class="registration-form" action="/inv/detail/:invId" method="post">
             <label>Review:</label>
-            <label><textarea id="review_text" name="review_text" class="review-input" placeholder="Reviews must be at least 10 characters" value="<%= locals.review_text %>"></textarea></label>
+            <label><textarea id="review_text" name="review_text" class="registration-input" placeholder="Reviews must be at least 10 characters"></textarea></label>
             <div class="button-holder">
-                <button class="review-button">Submit Review</button>
+                <button class="registration-button">Submit Review</button>
             </div>
             <input type="hidden" name="inv_id" value=${inv_id}>
         </form>`
