@@ -211,11 +211,21 @@ Util.checkAccountType = (req, res, next) => {
 /* ****************************************
 *  Build account management view
 * ************************************ */
-Util.buildAccountManagementView = (req, res, next) => {
+Util.buildAccountManagementView = async function (review_data) {
   let account_data = jwt.verify(cookies.jwt, process.env.ACCESS_TOKEN_SECRET)
   let content = `<h2>Welcome ${account_data.account_firstname}</h2>
   <p>You're logged in.</p>
   <a href="/account/update">Edit Account Information</a>`
+  
+  if (review_data) {
+    content += `<h2>My Reviews</h2>
+    <ol>`
+    review_data.forEach((review) => {
+      content += `<li>Reviewed the ${review.inv_year} ${review.inv_make} ${review.inv_model} on ${review.review_date} | <a href="/account/edit-review">Edit</a> | <a href="/account/delete-review">Delete</a></li>`
+    })
+    content += `</ol>`
+  }
+  
   
   if (account_data.account_type != "Client") {
     content += `

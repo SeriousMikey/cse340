@@ -108,7 +108,18 @@ async function getAccountDataByInvId(inv_id) {
         console.error("Get Account Data Error: " + error)
     }
       
-  }
+}
+
+// Get review and vehicle data with account_id
+async function getReviewAndVehicleData(account_id) {
+    try {
+        const sql = 'SELECT * FROM public.review INNER JOIN public.inventory ON public.review.inv_id = public.inventory.inv_id INNER JOIN public.account ON public.review.account_id = public.account.account_id WHERE public.review.account_id = $1'
+        const data = await pool.query(sql, [account_id])
+        return data.rows
+    } catch (error) {
+        console.error("Get Review and Vehicle Error: " + error)
+    }
+}
 
 module.exports = {getClassifications, 
                 getInventoryByClassificationId, 
@@ -119,4 +130,5 @@ module.exports = {getClassifications,
                 deleteVehicle,
                 addReview,
                 getReviewsByInvId,
-                getAccountDataByInvId};
+                getAccountDataByInvId,
+                getReviewAndVehicleData};

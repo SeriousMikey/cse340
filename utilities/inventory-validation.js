@@ -1,4 +1,5 @@
 const utilities = require(".")
+const invModel = require("../models/inventory-model")
 const { body, validationResult } = require("express-validator")
 const validate = {}
 
@@ -192,7 +193,7 @@ validate.newReviewRules = () => {
 
 // Check the review data
 validate.checkNewReviewData = async (req, res, next) => {
-    const { review_text } = req.body
+    const { review_text, inv_id } = req.body
 
     let errors = []
     errors = validationResult(req)
@@ -204,13 +205,14 @@ validate.checkNewReviewData = async (req, res, next) => {
         let nav = await utilities.getNav()
         let links = utilities.getAccountLinks()
         const vehicle = `${car_data[0].inv_year} ${car_data[0].inv_model} ${car_data[0].inv_make}`
-        res.render("./inventory/detail", {
+        res.render("./index", {
             title: vehicle,
             links,
             nav,
             content,
-            errors: null,
+            errors,
             review_text,
+            inv_id
           })
         return
     }
