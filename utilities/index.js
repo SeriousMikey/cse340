@@ -56,21 +56,56 @@ Util.buildClassificationGrid = async function(data){
     return grid
 }
 
-Util.buildIndividualView = async function(data) {
+Util.buildIndividualView = async function(car_data, review_data, users_data, inv_id) {
     let content
-    if(data.length > 0){
+    if(car_data.length > 0){
         content = `<section id="vehicle-info">
-        <img src="${data[0].inv_image}" alt="Image of ${data[0].inv_year} ${data[0].inv_model} ${data[0].inv_make}">
+        <img src="${car_data[0].inv_image}" alt="Image of ${car_data[0].inv_year} ${car_data[0].inv_model} ${car_data[0].inv_make}">
         <div id="vehicle-details">
-            <h2>${data[0].inv_model} ${data[0].inv_make} Details</h2>
+            <h2>${car_data[0].inv_model} ${car_data[0].inv_make} Details</h2>
             <ul>
-                <li><b>Price: $${new Intl.NumberFormat('en-US').format(data[0].inv_price)}</b></li>
-                <li><b>Description</b>: ${data[0].inv_description}</li>
-                <li><b>Color</b>: ${data[0].inv_color}</li>
-                <li><b>Miles</b>: ${new Intl.NumberFormat('en-US').format(data[0].inv_miles)}</li>
+                <li><b>Price: $${new Intl.NumberFormat('en-US').format(car_data[0].inv_price)}</b></li>
+                <li><b>Description</b>: ${car_data[0].inv_description}</li>
+                <li><b>Color</b>: ${car_data[0].inv_color}</li>
+                <li><b>Miles</b>: ${new Intl.NumberFormat('en-US').format(car_data[0].inv_miles)}</li>
             </ul>
         </div>
-    </section>`
+    </section>
+    <section id="vehicle-reviews">
+        <h3>Customer Reviews</h3>`
+        if (review_data.length > 0) {
+          content += `<ul>`
+          review_data.forEach((review) => {
+            let username
+            users_data.forEach((user_data) => {
+              if (user_data.account_id == review.account_id) {
+                username = user_data.account_firstname
+              }
+            })
+            content += `<li>
+                <p><strong>${username}</strong> wrote on ${review.review_date}</p>
+                <hr>
+                <p>${review.review_text}</p>
+            </li>`})
+          content += `</ul>
+      </section>`
+        } else {
+          content += `<p id="be_the_first">Be the first to write a review.</p>`
+        }
+        
+      if (cookies.jwt) {
+        content += `<h3>Add Your Own Review</h3>
+        <form id="review-form" action="/inv/detail/:invId" method="post">
+            <label>Review:</label>
+            <label><textarea id="review_text" name="review_text" class="review-input" placeholder="Reviews must be at least 10 characters" value="<%= locals.review_text %>"></textarea></label>
+            <div class="button-holder">
+                <button class="review-button">Submit Review</button>
+            </div>
+            <input type="hidden" name="inv_id" value=${inv_id}>
+        </form>`
+      } else {
+      content += `<p>You must <a href="/account/login">login</a> to write a review`
+      }
     } else { 
         content = '<p class="notice">Sorry, no matching vehicles could be found.</p>'
     }
